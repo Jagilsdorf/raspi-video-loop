@@ -1,6 +1,17 @@
-import os
-import glob
-import time
+import os, glob; from time import sleep as s
+
+def set_audio_to_hdmi():
+    # Detect the active HDMI outputs
+    hdmi_status = os.popen("tvservice -s").read()
+    
+    # If HDMI is active, set audio output to HDMI
+    if "HDMI" in hdmi_status and "0x120002" not in hdmi_status:
+        os.system("amixer cset numid=3 2")  # Set audio output to HDMI
+    else:
+        os.system("amixer cset numid=3 1")  # Set audio output to Analog
+
+set_audio_to_hdmi()
+
 
 EXTENSIONS = ["mp4", "m4v"]
 
@@ -43,7 +54,7 @@ if flash_drive_exists:
         new_path = f"/etc/raspi-video-loop/file{os.path.splitext(video_file)[1]}"
         os.system(f"cp '{video_file}' '{new_path}'")
         os.system(f'umount {base_path}')
-        time.sleep(2)
+        s(2)
         start_vlc(new_path)
     else:
         start_vlc(get_latest_video())
