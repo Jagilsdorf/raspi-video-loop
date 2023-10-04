@@ -30,3 +30,4 @@ Exec=/usr/bin/python3 /etc/raspi-video-loop/main.py
 Hidden=false
 X-GNOME-Autostart-enabled=true
 Name=Custom Script" > ~/.config/autostart/custom_script.desktop
+reboot
