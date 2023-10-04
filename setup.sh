@@ -9,10 +9,11 @@ git clone https://github.com/jagilsdorf/raspi-video-loop.git
 
 mkdir /etc/raspi-video-loop/
 
-# Move the scripts to the user's new directory
+# Move the assets to the user's new directory
 mv raspi-video-loop/main.py /etc/raspi-video-loop/
 mv raspi-video-loop/screensaver.py /etc/raspi-video-loop/
 mv raspi-video-loop/logo.png /etc/raspi-video-loop/
+mv raspi-video-loop/file.mp4 /etc/raspi-video-loop/
 
 # Set permissions to execute the python scripts
 chmod +x /etc/raspi-video-loop/main.py
