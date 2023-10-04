@@ -31,4 +31,13 @@ Exec=/usr/bin/python3 /etc/raspi-video-loop/main.py
 Hidden=false
 X-GNOME-Autostart-enabled=true
 Name=Custom Script" > ~/.config/autostart/custom_script.desktop
+
+# Auto-hide the LXPanel (taskbar)
+sed -i 's/autohide=0/autohide=1/' ~/.config/lxpanel/LXDE-pi/panels/panel
+
+# Hide Wastebasket and External Disks icons from the desktop
+sed -i 's/show_trash=1/show_trash=0/' ~/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
+sed -i 's/show_mounts=1/show_mounts=0/' ~/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
+
+# Reboot the Raspberry Pi
 reboot
