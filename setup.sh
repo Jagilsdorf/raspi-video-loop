@@ -7,7 +7,9 @@ sudo apt-get install -y git vlc xterm python3-pil.imagetk
 # Clone the repository
 git clone https://github.com/jagilsdorf/raspi-video-loop.git
 
-sudo mkdir /etc/raspi-video-loop/
+if [ ! -d "~/.config/autostart" ]; then
+    sudo mkdir /etc/raspi-video-loop/
+fi
 
 # Move the assets to the user's new directory
 sudo mv raspi-video-loop/main.py /etc/raspi-video-loop/
