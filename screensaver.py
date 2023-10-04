@@ -1,0 +1,51 @@
+import os
+from tkinter import Tk, Canvas
+from PIL import Image, ImageTk
+
+class DVDEmulator:
+    def __init__(self, root, image_path):
+        self.root = root
+        self.canvas = Canvas(self.root, bg="white")
+        self.canvas.pack(fill="both", expand=True)
+
+        original_image = Image.open(image_path)
+        larger_dimension = max(original_image.width, original_image.height)
+        scale_factor = 450.0 / larger_dimension
+
+        new_image = original_image.resize((int(original_image.width * scale_factor), int(original_image.height * scale_factor)))
+
+        frame_size = (int(new_image.width * 1.05), int(new_image.height * 1.05))
+        frame = Image.new("RGBA", frame_size)
+
+        frame.paste(new_image, (int((frame_size[0] - new_image.width) / 2), int((frame_size[1] - new_image.height) / 2)), new_image)
+
+        self.image = ImageTk.PhotoImage(frame)
+        self.width = self.canvas.winfo_screenwidth()
+        self.height = self.canvas.winfo_screenheight()
+
+        self.image_label = self.canvas.create_image(self.width / 2, self.height / 2, image=self.image)
+        self.vx = 1
+        self.vy = 1
+        self.animate()
+
+        self.root.bind("<Escape>", lambda event: root.quit())
+
+    def animate(self):
+        x, y = self.canvas.coords(self.image_label)
+        img_width = self.image.width()
+        img_height = self.image.height()
+
+        if x + img_width / 2 >= self.width or x - img_width / 2 <= 0:
+            self.vx = -self.vx
+        if y + img_height / 2 >= self.height or y - img_height / 2 <= 0:
+            self.vy = -self.vy
+
+        self.canvas.move(self.image_label, self.vx, self.vy)
+        self.root.after(10, self.animate)
+
+if __name__ == "__main__":
+    root = Tk()
+    root.attributes("-fullscreen", True)
+    logo_path = f"/etc/raspi-video-loop/logo.png"
+    emulator = DVDEmulator(root, logo_path)
+    root.mainloop()
