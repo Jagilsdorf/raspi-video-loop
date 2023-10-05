@@ -2,6 +2,7 @@ import os, glob; from time import sleep as s
 
 EXTENSIONS = ["mp4", "m4v"]
 current_user = os.getlogin()
+base_path = f"/media/{current_user}"
 
 def start_screensaver():
     os.system(f"python3 /home/{current_user}/raspi-video-loop/screensaver.py")
@@ -14,7 +15,8 @@ def remove_old_videos():
         for file_path in glob.glob(f"/home/{current_user}/raspi-video-loop/file.{ext}"):
             os.remove(file_path)
 
-base_path = f"/media/{current_user}"
+os.system('amixer cset numid=3 2 & amixer set Master 100%')
+
 
 flash_drive_exists = os.path.exists(base_path)
 

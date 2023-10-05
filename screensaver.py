@@ -46,6 +46,6 @@ class DVDEmulator:
 if __name__ == "__main__":
     root = Tk()
     root.attributes("-fullscreen", True)
-    logo_path = f"/etc/raspi-video-loop/logo.png"
+    logo_path = f"/home/{os.getlogin()}/raspi-video-loop/logo.png"
     emulator = DVDEmulator(root, logo_path)
     root.mainloop()
