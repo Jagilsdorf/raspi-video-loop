@@ -16,6 +16,8 @@ git clone https://github.com/jagilsdorf/raspi-video-loop.git ~/raspi-video-loop
 # Set permissions to execute the python scripts
 chmod +x ~/raspi-video-loop/*.py
 chmod u+w ~/raspi-video-loop/
+sudo chown -R $USER:$USER /home/$USER/raspi-video-loop/
+chmod -R 755 /home/$USER/raspi-video-loop/
 
 # Check if autostart directory exists, if not create it
 if [ ! -d "~/.config/autostart" ]; then
