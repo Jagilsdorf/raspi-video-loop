@@ -1,13 +1,11 @@
-import os, subprocess, glob, logging; from time import sleep as s
+import os, subprocess, glob; from time import sleep as s
 
 EXTENSIONS = ["mp4", "m4v"]
 current_user = os.getlogin()
 base_path = f"/media/{current_user}"
 
-os.system(f"touch /home/{current_user}/raspi_video_loop/main_py.log")
-logging.basicConfig(filename=f'/home/{current_user}/raspi_video_loop/main_py.log', level=logging.DEBUG)
-logging.info('Script started')
-
+with open(f'/home/{current_user}/raspi_video_loop/main_py.log', 'a') as f:
+    f.write("Testing manual logging\n")
 
 def start_screensaver():
     #os.system() waits for screensaver to complete before continuing. Using subprocees instead.
