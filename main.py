@@ -7,6 +7,7 @@ base_path = f"/media/{current_user}"
 logging.basicConfig(filename=f'/home/{current_user}/raspi-video-loop/main_py.log', level=logging.DEBUG)
 logging.info('Script started')
 
+os.system('amixer cset numid=3 2 & amixer set Master 100%')
 
 def start_screensaver():
     #os.system() waits for screensaver to complete before continuing. Using subprocees instead.
@@ -19,9 +20,6 @@ def remove_old_videos():
     for ext in EXTENSIONS:
         for file_path in glob.glob(f"/home/{current_user}/raspi-video-loop/file.{ext}"):
             os.remove(file_path)
-
-os.system('amixer cset numid=3 2 & amixer set Master 100%')
-
 
 flash_drive_exists = os.path.exists(base_path)
 
