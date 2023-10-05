@@ -17,7 +17,7 @@ class DVDEmulator:
         new_image = original_image.resize((int(original_image.width * scale_factor), int(original_image.height * scale_factor)))
         if new_image.mode != "RGBA": new_image = new_image.convert("RGBA")
 
-        frame_size = (int(new_image.width * 1.05), int(new_image.height * 1.05))
+        frame_size = (int(new_image.width * 1.01), int(new_image.height * 1.01))
         frame = Image.new("RGBA", frame_size)
 
         frame.paste(new_image, (int((frame_size[0] - new_image.width) / 2), int((frame_size[1] - new_image.height) / 2)), new_image)
