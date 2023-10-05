@@ -24,10 +24,10 @@ fi
 # Create autostart entry for the main script
 echo "[Desktop Entry]
 Type=Application
-Exec=/usr/bin/python3 ~/raspi-video-loop/main.py
+Exec=/usr/bin/python3 $HOME/raspi-video-loop/main.py
 Hidden=false
 X-GNOME-Autostart-enabled=true
-Name=Custom Script" > ~/.config/autostart/custom_script.desktop
+Name=Custom Script" > $HOME/.config/autostart/custom_script.desktop
 
 # Auto-hide the LXPanel (taskbar)
 sed -i 's/autohide=0/autohide=1/' ~/.config/lxpanel/LXDE-pi/panels/panel
