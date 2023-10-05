@@ -3,14 +3,18 @@
 # Update and install required packages
 sudo apt-get update
 sudo apt-get install -y git vlc xterm unclutter python3-pil.imagetk
-echo "unclutter -idle 0.5 -root &" >> ~/.bashrc
+
+#Auto-Hide mouse
+echo "unclutter -idle 0.1 -root &" >> ~/.bashrc
 
 # Clone the repository into the user's home directory
+if [ -d "~/raspi-video-loop" ]; then
+    sudo rm -rf ~/raspi-video-loop
+fi
 git clone https://github.com/jagilsdorf/raspi-video-loop.git ~/raspi-video-loop
 
 # Set permissions to execute the python scripts
-chmod +x ~/raspi-video-loop/main.py
-chmod +x ~/raspi-video-loop/screensaver.py
+chmod +x ~/raspi-video-loop/*.py
 
 # Check if autostart directory exists, if not create it
 if [ ! -d "~/.config/autostart" ]; then
