@@ -1,4 +1,7 @@
-import os, subprocess, glob; from time import sleep as s
+import os, subprocess, glob, logging; from time import sleep as s
+
+logging.basicConfig(filename='/home/[user]/raspi_video_loop/main_py.log', level=logging.DEBUG)
+logging.info('Script started')
 
 EXTENSIONS = ["mp4", "m4v"]
 current_user = os.getlogin()
