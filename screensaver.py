@@ -11,8 +11,7 @@ def set_wallpaper_with_logo():
     screen_size = (1920, 1080)  # Adjust this if you have a different resolution
 
     # Open the logo image
-    logo_path = f"/home/{os.getlogin()}/raspi-video-loop/logo.png"
-    logo = Image.open(logo_path)
+    logo = convert_to_rgba( Image.open( f"/home/{os.getlogin()}/raspi-video-loop/logo.png" ) )
 
     # Calculate position to center the logo
     x_pos = (screen_size[0] - logo.width) // 2
