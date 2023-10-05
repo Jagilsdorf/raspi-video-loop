@@ -2,7 +2,8 @@
 
 # Update and install required packages
 sudo apt-get update
-sudo apt-get install -y git vlc xterm python3-pil.imagetk
+sudo apt-get install -y git vlc xterm unclutter python3-pil.imagetk
+echo "unclutter -idle 0.5 -root &" >> ~/.bashrc
 
 # Clone the repository into the user's home directory
 git clone https://github.com/jagilsdorf/raspi-video-loop.git ~/raspi-video-loop
