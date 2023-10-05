@@ -36,5 +36,11 @@ sed -i 's/autohide=0/autohide=1/' ~/.config/lxpanel/LXDE-pi/panels/panel
 sed -i 's/show_trash=1/show_trash=0/' ~/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
 sed -i 's/show_mounts=1/show_mounts=0/' ~/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
 
+#Security: Block Wi-Fi and Bluetooth modules
+echo "blacklist brcmfmac" | sudo tee -a /etc/modprobe.d/raspi-blacklist.conf
+echo "blacklist brcmutil" | sudo tee -a /etc/modprobe.d/raspi-blacklist.conf
+echo "blacklist btbcm" | sudo tee -a /etc/modprobe.d/raspi-blacklist.conf
+echo "blacklist hci_uart" | sudo tee -a /etc/modprobe.d/raspi-blacklist.conf
+
 # Reboot the Raspberry Pi
 reboot
