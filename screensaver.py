@@ -1,6 +1,31 @@
 import os
 from tkinter import Tk, Canvas
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk, ImageDraw
+
+def set_wallpaper_with_logo():
+    # Get screen size
+    screen_size = (1920, 1080)  # Adjust this if you have a different resolution
+
+    # Open the logo image
+    logo_path = f"/home/{os.getlogin()}/raspi-video-loop/logo.png"
+    logo = Image.open(logo_path)
+
+    # Calculate position to center the logo
+    x_pos = (screen_size[0] - logo.width) // 2
+    y_pos = (screen_size[1] - logo.height) // 2
+
+    # Create a white background image
+    background = Image.new('RGB', screen_size, color='white')
+
+    # Paste the logo onto the white background
+    background.paste(logo, (x_pos, y_pos), logo)
+
+    # Save the new image (temporary file)
+    tmp_wallpaper = "/tmp/wallpaper.png"
+    background.save(tmp_wallpaper)
+
+    # Set the wallpaper using pcmanfm
+    os.system(f'pcmanfm --set-wallpaper {tmp_wallpaper}')
 
 class DVDEmulator:
     def __init__(self, root, image_path):
@@ -47,8 +72,9 @@ class DVDEmulator:
         self.root.after(10, self.animate)
 
 if __name__ == "__main__":
+    logo_path = f"/home/{os.getlogin()}/raspi-video-loop/logo.png"
+    set_wallpaper_with_logo()
     root = Tk()
     root.attributes("-fullscreen", True)
-    logo_path = f"/home/{os.getlogin()}/raspi-video-loop/logo.png"
     emulator = DVDEmulator(root, logo_path)
     root.mainloop()
