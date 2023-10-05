@@ -2,6 +2,10 @@ import os
 from tkinter import Tk, Canvas
 from PIL import Image, ImageTk, ImageDraw
 
+def convert_to_rgba(img):
+    if img.mode != "RGBA": img = img.convert("RGBA")
+    return img
+
 def set_wallpaper_with_logo():
     # Get screen size
     screen_size = (1920, 1080)  # Adjust this if you have a different resolution
@@ -15,7 +19,7 @@ def set_wallpaper_with_logo():
     y_pos = (screen_size[1] - logo.height) // 2
 
     # Create a white background image
-    background = Image.new('RGB', screen_size, color='white')
+    background = convert_to_rgba(Image.new('RGB', screen_size, color='white'))
 
     # Paste the logo onto the white background
     background.paste(logo, (x_pos, y_pos), logo)
@@ -33,14 +37,12 @@ class DVDEmulator:
         self.canvas = Canvas(self.root, bg="white")
         self.canvas.pack(fill="both", expand=True)
 
-        original_image = Image.open(image_path)
-        if original_image.mode != "RGBA": original_image = original_image.convert("RGBA")
+        original_image = convert_to_rgba(Image.open(image_path))
 
         larger_dimension = max(original_image.width, original_image.height)
         scale_factor = 450.0 / larger_dimension
 
-        new_image = original_image.resize((int(original_image.width * scale_factor), int(original_image.height * scale_factor)))
-        if new_image.mode != "RGBA": new_image = new_image.convert("RGBA")
+        new_image = convert_to_rgba(original_image.resize((int(original_image.width * scale_factor), int(original_image.height * scale_factor))))
 
         frame_size = (int(new_image.width * 1.01), int(new_image.height * 1.01))
         frame = Image.new("RGBA", frame_size)
