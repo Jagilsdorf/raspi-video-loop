@@ -7,7 +7,7 @@ base_path = f"/media/{current_user}"
 logging.basicConfig(filename=f'/home/{current_user}/raspi-video-loop/main_py.log', level=logging.DEBUG)
 logging.info('Script started')
 
-os.system('amixer cset numid=3 2 & amixer set Master 100%')
+os.system('amixer cset numid=3 2 && amixer set Master 100%')
 
 def start_screensaver():
     #os.system() waits for screensaver to complete before continuing. Using subprocees instead.
