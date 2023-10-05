@@ -1,11 +1,12 @@
-import os, glob; from time import sleep as s
+import os, subprocess, glob; from time import sleep as s
 
 EXTENSIONS = ["mp4", "m4v"]
 current_user = os.getlogin()
 base_path = f"/media/{current_user}"
 
 def start_screensaver():
-    os.system(f"python3 /home/{current_user}/raspi-video-loop/screensaver.py")
+    #os.system() waits for screensaver to complete before continuing. Using subprocees instead.
+    subprocess.Popen(["python3", f"/home/{current_user}/raspi-video-loop/screensaver.py"])
 
 def start_vlc(path):
     os.system(f"vlc --fullscreen --loop --no-video-title-show {path}")
