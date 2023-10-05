@@ -9,10 +9,13 @@ class DVDEmulator:
         self.canvas.pack(fill="both", expand=True)
 
         original_image = Image.open(image_path)
+        if original_image.mode != "RGBA": original_image = original_image.convert("RGBA")
+
         larger_dimension = max(original_image.width, original_image.height)
         scale_factor = 450.0 / larger_dimension
 
         new_image = original_image.resize((int(original_image.width * scale_factor), int(original_image.height * scale_factor)))
+        if new_image.mode != "RGBA": new_image = new_image.convert("RGBA")
 
         frame_size = (int(new_image.width * 1.05), int(new_image.height * 1.05))
         frame = Image.new("RGBA", frame_size)
