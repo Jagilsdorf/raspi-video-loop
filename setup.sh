@@ -5,7 +5,7 @@ sudo apt-get update
 sudo apt-get install -y git vlc xterm unclutter python3-pil.imagetk
 
 #Auto-Hide mouse
-echo "unclutter -idle 0.1 -root &" >> ~/.bashrc
+#echo "unclutter -idle 0.1 -root &" >> ~/.bashrc
 
 # Clone the repository into the user's home directory
 if [ -d "~/raspi-video-loop" ]; then
