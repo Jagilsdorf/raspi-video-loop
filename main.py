@@ -36,7 +36,7 @@ if flash_drives:
         for file in files:
             if file.endswith('.png') and not png_found:
                 png_found = True
-                shutil.copy(os.path.join(root, file), f'/home/{current_user}/raspi-video-loop/logo.png')
+                os.system(f'cp {os.path.join(root, file)} /home/{current_user}/raspi-video-loop/logo.png')
             if file.endswith(tuple(EXTENSIONS)):
                 video_file = os.path.join(root, file)
                 break
