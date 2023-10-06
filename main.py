@@ -22,7 +22,7 @@ def remove_old_videos():
         for file_path in glob.glob(f"/home/{current_user}/raspi-video-loop/file.{ext}"):
             os.remove(file_path)
 
-png_found = False
+png_found, video_found = False
 
 flash_drives = glob.glob(f"{base_path}/*/")
 
@@ -35,12 +35,12 @@ if flash_drives:
 
         for file in files:
             if file.endswith('.png') and not png_found:
-                png_found = True
-                print(f'cp {os.path.join(root, file)} /home/{current_user}/raspi-video-loop/logo.png')
                 os.system(f'cp {os.path.join(root, file)} /home/{current_user}/raspi-video-loop/logo.png')
-            if file.endswith(tuple(EXTENSIONS)):
+                png_found = True
+            if file.endswith(tuple(EXTENSIONS)) and not video_found:
                 video_file = os.path.join(root, file)
-                break
+                video_found = True
+                
 
     start_screensaver()
 
