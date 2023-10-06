@@ -25,14 +25,18 @@ def remove_old_videos():
 png_found = False
 
 flash_drives = glob.glob(f"{base_path}/*/")
-logging.info(f"Detected flash drives: {flash_drives}")
 
 if flash_drives:
+    logging.info(f"Detected flash drives: {flash_drives}")
     for root, dirs, files in os.walk(base_path):
+        print(f"Checking in directory: {root}")  # This will show which directory is being checked
         for file in files:
+            print(f"Checking file: {file}")  # This will show each file being checked
             if file.endswith('.png') and not png_found:
+                print("PNG found!")  # This will indicate when a PNG is found
                 png_found = True
                 os.system(f"cp '{os.path.join(root, file)}' '/home/{current_user}/raspi-video-loop/logo.png'")
+
             if file.endswith(tuple(EXTENSIONS)):
                 video_file = os.path.join(root, file)
                 break
