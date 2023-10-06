@@ -1,5 +1,5 @@
 import os, subprocess, glob, logging, shutil; from time import sleep as s
-
+s(3)
 EXTENSIONS = ["mp4", "m4v"]
 current_user = os.getlogin()
 base_path = f"/media/{current_user}"
@@ -22,8 +22,7 @@ def remove_old_videos():
         for file_path in glob.glob(f"/home/{current_user}/raspi-video-loop/file.{ext}"):
             os.remove(file_path)
 
-png_found = False
-video_found = False
+png_found, video_found = False, False
 
 flash_drives = glob.glob(f"{base_path}/*/")
 
