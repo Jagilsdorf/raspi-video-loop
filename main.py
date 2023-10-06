@@ -1,4 +1,4 @@
-import os, subprocess, glob, logging; from time import sleep as s
+import os, subprocess, glob, logging, shutil; from time import sleep as s
 
 EXTENSIONS = ["mp4", "m4v"]
 current_user = os.getlogin()
@@ -29,17 +29,15 @@ flash_drives = glob.glob(f"{base_path}/*/")
 if flash_drives:
     logging.info(f"Detected flash drives: {flash_drives}")
     for root, dirs, files in os.walk(base_path):
-        print(f"Checking in directory: {root}")  # This will show which directory is being checked
+
+        # Remove directories that start with a period from the list 'dirs'
+        dirs[:] = [d for d in dirs if not d.startswith('.')]
+
         for file in files:
             if file.endswith('.png') and not png_found:
-                print("PNG found!")  # This will indicate when a PNG is found
                 png_found = True
-                copy_command = f"cp '{os.path.join(root, file)}' '/home/{current_user}/raspi-video-loop/logo.png'"
-                print(copy_command)
-                os.system(copy_command)
-
+                shutil.copy(os.path.join(root, file), f'/home/{current_user}/raspi-video-loop/logo.png')
             if file.endswith(tuple(EXTENSIONS)):
-                print("Video found!")  # This will indicate when a PNG is found
                 video_file = os.path.join(root, file)
                 break
 
