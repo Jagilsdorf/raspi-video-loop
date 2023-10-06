@@ -31,13 +31,15 @@ if flash_drives:
     for root, dirs, files in os.walk(base_path):
         print(f"Checking in directory: {root}")  # This will show which directory is being checked
         for file in files:
-            print(f"Checking file: {file}")  # This will show each file being checked
             if file.endswith('.png') and not png_found:
                 print("PNG found!")  # This will indicate when a PNG is found
                 png_found = True
-                os.system(f"cp '{os.path.join(root, file)}' '/home/{current_user}/raspi-video-loop/logo.png'")
+                copy_command = f"cp '{os.path.join(root, file)}' '/home/{current_user}/raspi-video-loop/logo.png'"
+                print(copy_command)
+                os.system(copy_command)
 
             if file.endswith(tuple(EXTENSIONS)):
+                print("Video found!")  # This will indicate when a PNG is found
                 video_file = os.path.join(root, file)
                 break
 
