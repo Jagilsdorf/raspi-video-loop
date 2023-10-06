@@ -8,6 +8,7 @@ logging.basicConfig(filename=f'/home/{current_user}/raspi-video-loop/main_py.log
 logging.info('Script started')
 
 os.system('amixer cset numid=3 2 && amixer set Master 100%')
+os.system(f'sudo chmod 755 {base_path+"/*"}')
 
 def start_screensaver():
     #os.system() waits for screensaver to complete before continuing. Using subprocees instead.
@@ -24,6 +25,8 @@ def remove_old_videos():
 png_found = False
 
 flash_drives = glob.glob(f"{base_path}/*/")
+logging.info(f"Detected flash drives: {flash_drives}")
+
 if flash_drives:
     for root, dirs, files in os.walk(base_path):
         for file in files:
