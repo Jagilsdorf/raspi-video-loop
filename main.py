@@ -21,7 +21,7 @@ def remove_old_videos():
         for file_path in glob.glob(f"/home/{current_user}/raspi-video-loop/file.{ext}"):
             os.remove(file_path)
 
-flash_drives = glob.glob(f"{base_path}/*/")
+png_found = False
 
 flash_drives = glob.glob(f"{base_path}/*/")
 if flash_drives:
